@@ -7,6 +7,14 @@
 </head>
 <body>
     hola mundo
+
+    <div class="fb-send-to-messenger" 
+      messenger_app_id="612888230928436" 
+      page_id="109419601639318" 
+      data-ref="send_to_messenger" 
+      color="blue" 
+      size="standard">
+    </div>
 </body>
 
 <script>
@@ -17,10 +25,11 @@
       xfbml            : true,
       version          : 'v17.0'
     });
-    FB.ui({
-      method: 'share',
-      href: 'https://developers.facebook.com/docs/'
-    }, function(response){});
+    
+    FB.Event.subscribe('send_to_messenger', function(e) {
+      // callback for events triggered by the plugin
+      console.log('hola, ya se mando el mensaje')
+    });
   };
 
 
