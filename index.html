@@ -11,7 +11,8 @@
     <div class="fb-send-to-messenger" 
       messenger_app_id="612888230928436" 
       page_id="109419601639318" 
-      data-ref="send_to_messenger" 
+      data-ref="6645564186"
+       
       color="blue" 
       cta_text="MESSAGE_ME"
       size="standard">
@@ -27,9 +28,15 @@
       version          : 'v17.0'
     });
     
-    FB.Event.subscribe('send_to_messenger', function(e) {
+    FB.Event.subscribe('send_to_messenger', async function(e) {
       // callback for events triggered by the plugin
-      console.log('hola, ya se mando el mensaje')
+      if(e.event == 'opt_in'){
+        console.log('hola, ya se mando el mensaje')
+        console.log(e.ref)
+
+        const url = `https://242a-189-202-71-25.ngrok-free.app/api/v1/messenger/welcome-message/${e.ref}`
+        const response = await fetch(url,{method:'POST'})
+      }
     });
   };
 
